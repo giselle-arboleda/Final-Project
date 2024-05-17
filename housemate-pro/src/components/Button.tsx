@@ -1,9 +1,18 @@
 import React from "react";
-// import "./Button.css";
-const Button = () => {
+interface Props {
+  children: string;
+  onClick: () => void;
+  color?: string;
+}
+
+const Button = ({ children, onClick, color = "primary" }: Props) => {
   return (
-    <button type="button" className="btn btn-primary btn-circle">
-      User1
+    <button
+      type="button"
+      className={"btn btn-" + color + " btn-circle"}
+      onClick={onClick}
+    >
+      {children}
     </button>
   );
 };
