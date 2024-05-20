@@ -1,9 +1,13 @@
 import Button from "./components/Button";
+import Navbar from "./components/NavBar";
 // import ButtonGroup from "./components/ButtonGroup";
 
 function App() {
   return (
     <div>
+      <div>
+        <Navbar></Navbar>
+      </div>
       <h1>Hello, Niko and Thomas! Let's get started on this project :)</h1>
       <div>
         <div className="row align-items-center">
