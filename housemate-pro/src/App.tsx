@@ -1,5 +1,6 @@
 import Button from "./components/Button";
 import Navbar from "./components/NavBar";
+import BigCard from "./components/BigCard";
 // import ButtonGroup from "./components/ButtonGroup";
 
 function App() {
@@ -9,6 +10,9 @@ function App() {
         <Navbar></Navbar>
       </div>
       <h1>Hello, Niko and Thomas! Let's get started on this project :)</h1>
+      <div>
+        <BigCard></BigCard>
+      </div>
       <div>
         <div className="row align-items-center">
           <div className="col">
