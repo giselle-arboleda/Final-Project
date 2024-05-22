@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
 import './AddMemberForm.scss';
 
-const AddMemberForm = ({ onAddMember, onClose }) => {
+const AddMemberForm = ({ onAddMember, onClose, householdMembers }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (username && email) {
-      onAddMember({ username, email });
+      onAddMember({
+        id: householdMembers.length + 1,
+        name: username,
+        imgSrc: `${process.env.PUBLIC_URL}/Nerd.jpg`,
+        chores: [
+          ],
+      });
       setUsername('');
       setEmail('');
     }

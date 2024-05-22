@@ -33,6 +33,7 @@ function App() {
 
   const handleAddMember = (member) => {
     setHouseholdMembers([...householdMembers, member]);
+    console.log(householdMembers);
   };
 
   const handleAddChore = (chore) => {
@@ -76,7 +77,7 @@ function App() {
     <div className="App">
       <Navbar onAssignChore={openAssignChoreForm} />
       <h1>Household Members</h1>
-      {showAddMemberForm && <AddMemberForm onAddMember={handleAddMember} onClose={closeAddMemberForm} />}
+      {showAddMemberForm && <AddMemberForm onAddMember={handleAddMember} onClose={closeAddMemberForm} householdMembers={householdMembers} />}
       {showAssignChoreForm && <AssignChoreForm onAddChore={handleAddChore} onClose={closeAssignChoreForm} />}
       
       <div className="main-content">
