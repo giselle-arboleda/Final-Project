@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import {BrowserRouter as Router} from 'react-router-dom';
 import AddMemberForm from './components/AddMemberForm';
 import AssignChoreForm from './components/AssignChoreForm';
 import Navbar from './components/Navbar';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 const initialMembers = [
@@ -73,10 +75,15 @@ function App() {
     setSelectedMember(member);
   };
 
+  const handleReset=()=> {
+    setSelectedMember(null);
+    setShowAssignChoreForm(false);
+  }
+  
   return (
+    <Router>
     <div className="App">
-      <Navbar onAssignChore={openAssignChoreForm} />
-      <h1>Household Members</h1>
+      <Navbar onRequestNewChore={openAssignChoreForm} onReset={handleReset}/>
       {showAddMemberForm && <AddMemberForm onAddMember={handleAddMember} onClose={closeAddMemberForm} householdMembers={householdMembers} />}
       {showAssignChoreForm && <AssignChoreForm onAddChore={handleAddChore} onClose={closeAssignChoreForm} />}
       
@@ -110,6 +117,7 @@ function App() {
         )}
       </div>
     </div>
+    </Router>
   );
 }
 

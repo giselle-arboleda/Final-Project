@@ -1,34 +1,38 @@
 .navbar {
-  display: flex;
-  align-items: center;
-  background-color: #333;
-  padding: 10px;
-  position: relative;
-}
+  h1{
+    font-size: 24px;
+    color: #2892a7;
+  }
+  ul{
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
 
-.menu-icon {
-  font-size: 24px;
-  color: white;
-  cursor: pointer;
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 40px;
-  left: 10px;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  list-style: none;
-  padding: 10px;
-  z-index: 1000;
-
-  li {
-    padding: 8px 12px;
-    cursor: pointer;
-
-    &:hover {
-      background-color: #f0f0f0;
-    }
+  li{
+    margin: 0;
+    padding: 0;
   }
 }
+
+.request-chore-button{
+  border-radius: 50%;
+  border: 50px solid #2892a7;
+  background-color: #2892a7 !important;
+  color: #2892a7;
+  font-size: 36px;
+  line-height: 100px;
+  text-align: center;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.request-chore-button:hover {
+  background-color: #114b56 !important;
+  color: white !important;
+}
+
+
+
+

@@ -58,7 +58,7 @@ const AssignChoreForm = ({ onAddChore, onClose }) => {
             required
           />
         </div>
-        <button type="submit">Request Chore</button>
+        <button type="submit">Assign Chore</button>
       </form>
     </div>
   );
