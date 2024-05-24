@@ -33,9 +33,27 @@ function App() {
   const [showAssignChoreForm, setShowAssignChoreForm] = useState(false);
   const [selectedMember, setSelectedMember] = useState(null);
 
+  const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+  const appendAlert = (message, type) => {
+    const wrapper = document.createElement('div')
+    wrapper.innerHTML = [
+      `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+      `   <div>${message}</div>`,
+      '   <button type="button" class="btn-close" onclick="this.parentElement.remove()" aria-label="Close"></button>',
+      '</div>'
+    ].join('')
+
+    alertPlaceholder.append(wrapper)
+  }
+
   const handleAddMember = (member) => {
+    if (householdMembers.find((mem) => mem.name===member.name)){
+      
+      appendAlert('WOOPS ALREADY A USER!', 'warning')
+    }
+    else {
     setHouseholdMembers([...householdMembers, member]);
-    console.log(householdMembers);
+    }
   };
 
   const handleAddChore = (chore) => {
@@ -80,6 +98,7 @@ function App() {
     setSelectedMember(null);
     setShowAssignChoreForm(false);
   }
+
   
   return (
     <Router>
@@ -88,6 +107,8 @@ function App() {
       {showAddMemberForm && <AddMemberForm onAddMember={handleAddMember} onClose={closeAddMemberForm} householdMembers={householdMembers} />}
       {showAssignChoreForm && <AssignChoreForm onAddChore={handleAddChore} onClose={closeAssignChoreForm} />}
       
+      <div id="liveAlertPlaceholder"></div>
+
       <div className="main-content">
         <div className="floor-plan">
           <h2>Floor Plan</h2>
@@ -103,6 +124,7 @@ function App() {
               />
             ))}
             <button className="add-member-button" onClick={openAddMemberForm}>+</button>
+
           </div>
         </div>
 
