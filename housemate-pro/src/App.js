@@ -3,6 +3,7 @@ import {BrowserRouter as Router} from 'react-router-dom';
 import AddMemberForm from './components/AddMemberForm';
 import AssignChoreForm from './components/AssignChoreForm';
 import Navbar from './components/Navbar';
+import ChoreBox from "./components/ChoreBox";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -105,7 +106,10 @@ function App() {
             <button className="add-member-button" onClick={openAddMemberForm}>+</button>
           </div>
         </div>
-
+        
+        <ChoreBox selectedMember={selectedMember}></ChoreBox>
+        
+        {/* Ideally the below code would go into ChoreBox.js. But I'm Having trouble passing selectedMember into ChoreBox.js */}
         {selectedMember && selectedMember.chores.length > 0 && (
           <div className="chores">
             <h2>Chores for {selectedMember.name}</h2>
