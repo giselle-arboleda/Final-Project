@@ -39,20 +39,21 @@ function App() {
   };
 
   const handleAddChore = (chore) => {
-    if (selectedMember) {
+      
+    const myMember = householdMembers.find((member) => member.name===chore.assignedTo);
+      console.log(myMember);
       setHouseholdMembers(
         householdMembers.map((member) =>
-          member.id === selectedMember.id
+          member.id === myMember.id
             ? { ...member, chores: [...member.chores, chore] }
             : member
         )
       );
       setSelectedMember({
-        ...selectedMember,
-        chores: [...selectedMember.chores, chore],
+        ...myMember,
+        chores: [...myMember.chores, chore],
       });
       setShowAssignChoreForm(false);
-    }
   };
 
   const openAddMemberForm = () => {
