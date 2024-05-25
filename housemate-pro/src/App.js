@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import ChoreBox from "./components/ChoreBox";
 import DraggableMember from './components/DraggableMember';
 import FloorPlan from './components/FloorPlan';
+import { ProgressBar } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -123,6 +124,39 @@ function App() {
     );
   };
 
+  const handleChoreCompletion = (memberId, choreIndex) => {
+    setHouseholdMembers((prevMembers) =>
+      prevMembers.map((member) =>
+        member.id === memberId
+          ? {
+              ...member,
+              chores: member.chores.map((chore, index) =>
+                index === choreIndex ? { ...chore, completed: !chore.completed } : chore
+              ),
+            }
+          : member
+      )
+    );
+
+    if (selectedMember && selectedMember.id === memberId) {
+      setSelectedMember((prevSelectedMember) => ({
+        ...prevSelectedMember,
+        chores: prevSelectedMember.chores.map((chore, index) =>
+          index === choreIndex ? { ...chore, completed: !chore.completed } : chore
+        ),
+      }));
+    }
+  };
+
+  const calculateProgress = () => {
+    const totalChores = householdMembers.reduce((sum, member) => sum + member.chores.length, 0);
+    const completedChores = householdMembers.reduce(
+      (sum, member) => sum + member.chores.filter((chore) => chore.completed).length,
+      0
+    );
+    return totalChores === 0 ? 0 : Math.round((completedChores / totalChores) * 100);
+  };
+
   return (
     <Router>
     <div className="App">
@@ -134,6 +168,11 @@ function App() {
       {/* <FloorPlan onDrop={handleDrop} /> */}
       
       <div id="liveAlertPlaceholder"></div>
+
+      <div className='progress-bar'>
+        <h2>Household Chore Status</h2>
+        <ProgressBar now={calculateProgress()} label={`${calculateProgress()}%`} />
+      </div>
 
       <div className="main-content">
         <div className="floor-plan">
@@ -162,15 +201,22 @@ function App() {
         {/* <ChoreBox selectedMember={selectedMember}></ChoreBox> */}
         
         {/* Ideally the below code would go into ChoreBox.js. But I'm Having trouble passing selectedMember into ChoreBox.js */}
-        {selectedMember && selectedMember.chores.length > 0 && (
-          <div className="chores">
-            <h2>Chores for {selectedMember.name}</h2>
-            <ul>
-              {selectedMember.chores.map((chore, index) => (
-                <li key={index}>{chore.choreName}</li>
-              ))}
-            </ul>
-          </div>
+        {selectedMember && (
+            <div className="chores">
+              <h2>Chores for {selectedMember.name}</h2>
+              <ul>
+                {selectedMember.chores.map((chore, index) => (
+                  <li key={index}>
+                    <input
+                      type="checkbox"
+                      checked={chore.completed}
+                      onChange={() => handleChoreCompletion(selectedMember.id, index)}
+                    />
+                    {chore.choreName}
+                  </li>
+                ))}
+              </ul>
+            </div>
         )}
       </div>
     </div>
