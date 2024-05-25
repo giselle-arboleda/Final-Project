@@ -4,6 +4,8 @@ import AddMemberForm from './components/AddMemberForm';
 import AssignChoreForm from './components/AssignChoreForm';
 import Navbar from './components/Navbar';
 import ChoreBox from "./components/ChoreBox";
+import DraggableMember from './components/DraggableMember';
+import FloorPlan from './components/FloorPlan';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -16,6 +18,7 @@ const initialMembers = [
       { choreName: 'Do the dishes', choreLocation: 'Kitchen', dueDate: '2024-06-01', assignedTo: 'Nerd' },
       { choreName: 'Take out the trash', choreLocation: 'Garage', dueDate: '2024-06-02', assignedTo: 'Nerd' }
     ],
+    position: {x:0 , y:0}
   },
   {
     id: 2,
@@ -33,7 +36,7 @@ function App() {
   const [showAddMemberForm, setShowAddMemberForm] = useState(false);
   const [showAssignChoreForm, setShowAssignChoreForm] = useState(false);
   const [selectedMember, setSelectedMember] = useState(null);
-
+  const [members, setMembers] = useState(initialMembers);
   const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
   const appendAlert = (message, type) => {
     const wrapper = document.createElement('div')
@@ -96,17 +99,39 @@ function App() {
   };
 
   const handleReset=()=> {
+    setHouseholdMembers((prevMembers) =>
+      prevMembers.map((member) => ({ ...member, position: { x: 0, y: 0 } }))
+    );
     setSelectedMember(null);
     setShowAssignChoreForm(false);
+
   }
 
-  
+  const handleDragEnd = (position, member) => {
+    setHouseholdMembers((prevMembers) =>
+      prevMembers.map((m) =>
+        m.id === member.id ? { ...m, position } : m
+      )
+    );
+  };
+
+  const handleDrop = (member, position) => {
+    setHouseholdMembers((prevMembers) =>
+      prevMembers.map((m) =>
+        m.id === member.id ? { ...m, position} : m
+      )
+    );
+  };
+
   return (
     <Router>
     <div className="App">
       <Navbar onRequestNewChore={openAssignChoreForm} onReset={handleReset}/>
       {showAddMemberForm && <AddMemberForm onAddMember={handleAddMember} onClose={closeAddMemberForm} householdMembers={householdMembers} />}
       {showAssignChoreForm && <AssignChoreForm onAddChore={handleAddChore} onClose={closeAssignChoreForm} />}
+      
+      
+      {/* <FloorPlan onDrop={handleDrop} /> */}
       
       <div id="liveAlertPlaceholder"></div>
 
@@ -115,21 +140,26 @@ function App() {
           <h2>Floor Plan</h2>
           <img src={`${process.env.PUBLIC_URL}/2D-floor-plan-with-room-color.jpg`} alt="2D Floor Plan" />
           <div className="members">
+            <h2>View/Edit Members</h2>
             {householdMembers.map((member) => (
-              <img
-                key={member.id}
-                src={member.imgSrc}
-                alt={member.name}
-                className="member-photo"
-                onClick={() => selectMember(member)}
-              />
+              <div key={member.id} className="member-container" onClick={() => selectMember(member)}>
+              <img src={member.imgSrc} alt={member.name} className="member-photo" />
+              <p className="member-name">{member.name}</p>
+            </div>
+              
             ))}
             <button className="add-member-button" onClick={openAddMemberForm}>+</button>
 
           </div>
         </div>
         
-        <ChoreBox selectedMember={selectedMember}></ChoreBox>
+        <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '20px' }}>
+        {members.map((member) => (
+          <DraggableMember key={member.id} member={member} onDragEnd={handleDragEnd} />
+        ))}
+        </div>
+
+        {/* <ChoreBox selectedMember={selectedMember}></ChoreBox> */}
         
         {/* Ideally the below code would go into ChoreBox.js. But I'm Having trouble passing selectedMember into ChoreBox.js */}
         {selectedMember && selectedMember.chores.length > 0 && (
