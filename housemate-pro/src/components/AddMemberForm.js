@@ -46,7 +46,7 @@ const AddMemberForm = ({ onAddMember, onClose, householdMembers, imageSources })
         </div>
         <div>
           {imageSources.map((image) => (
-            <img src={`${process.env.PUBLIC_URL}` + image} className='member-photo' onClick={() => setImgSource(`${process.env.PUBLIC_URL}` + image)} alt={image}></img>
+            <img src={`${process.env.PUBLIC_URL}` + image} className='add-member-photo' onClick={() => setImgSource(`${process.env.PUBLIC_URL}` + image)} alt={image}></img>
 
           ))}
         </div> 
