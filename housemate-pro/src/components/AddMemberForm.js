@@ -11,7 +11,7 @@ const AddMemberForm = ({ onAddMember, onClose, householdMembers }) => {
       onAddMember({
         id: householdMembers.length + 1,
         name: username,
-        imgSrc: `${process.env.PUBLIC_URL}/Nerd.jpg`,
+        imgSrc: `${process.env.PUBLIC_URL}/Stars.jpg`,
         chores: [
           ],
       });
@@ -42,6 +42,10 @@ const AddMemberForm = ({ onAddMember, onClose, householdMembers }) => {
             required
           />
         </div>
+        <div><div><img src={`${process.env.PUBLIC_URL}` + '/Stars.jpg'} className='member-photo'></img></div>
+        <div><img src={`${process.env.PUBLIC_URL}` + '/Nerd.jpg'} className='member-photo'></img></div>
+        <div><img src={`${process.env.PUBLIC_URL}` + '/Happy.jpg'} className='member-photo'></img></div>
+        </div>        
         <button type="submit">Add Member</button>
       </form>
     </div>
