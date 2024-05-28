@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import './AddMemberForm.scss';
 
-const AddMemberForm = ({ onAddMember, onClose, householdMembers }) => {
+const AddMemberForm = ({ onAddMember, onClose, householdMembers, imageSources }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
+  const [imgSource, setImgSource] = useState(`${process.env.PUBLIC_URL}/Happy.jpg`);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -11,12 +12,13 @@ const AddMemberForm = ({ onAddMember, onClose, householdMembers }) => {
       onAddMember({
         id: householdMembers.length + 1,
         name: username,
-        imgSrc: `${process.env.PUBLIC_URL}/Stars.jpg`,
+        imgSrc: imgSource,
         chores: [
           ],
       });
       setUsername('');
       setEmail('');
+      setImgSource(`${process.env.PUBLIC_URL}/Happy.jpg`);
     }
   };
 
@@ -42,10 +44,14 @@ const AddMemberForm = ({ onAddMember, onClose, householdMembers }) => {
             required
           />
         </div>
-        <div><div><img src={`${process.env.PUBLIC_URL}` + '/Stars.jpg'} className='member-photo'></img></div>
-        <div><img src={`${process.env.PUBLIC_URL}` + '/Nerd.jpg'} className='member-photo'></img></div>
-        <div><img src={`${process.env.PUBLIC_URL}` + '/Happy.jpg'} className='member-photo'></img></div>
-        </div>        
+        <div>
+          {imageSources.map((image) => (
+            <img src={`${process.env.PUBLIC_URL}` + image} className='member-photo' onClick={() => setImgSource(`${process.env.PUBLIC_URL}` + image)} alt={image}></img>
+
+          ))}
+        </div> 
+        
+               
         <button type="submit">Add Member</button>
       </form>
     </div>

@@ -32,6 +32,8 @@ const initialMembers = [
   },
 ];
 
+const imageSources = ['/Stars.jpg', '/Nerd.jpg', '/Happy.jpg', '/Crazy.jpg']
+
 function App() {
   const [householdMembers, setHouseholdMembers] = useState(initialMembers);
   const [showAddMemberForm, setShowAddMemberForm] = useState(false);
@@ -161,7 +163,7 @@ function App() {
     <Router>
     <div className="App">
       <Navbar onRequestNewChore={openAssignChoreForm} onReset={handleReset}/>
-      {showAddMemberForm && <AddMemberForm onAddMember={handleAddMember} onClose={closeAddMemberForm} householdMembers={householdMembers} />}
+      {showAddMemberForm && <AddMemberForm onAddMember={handleAddMember} onClose={closeAddMemberForm} householdMembers={householdMembers} imageSources={imageSources}/>}
       {showAssignChoreForm && <AssignChoreForm onAddChore={handleAddChore} onClose={closeAssignChoreForm} />}
       
       
