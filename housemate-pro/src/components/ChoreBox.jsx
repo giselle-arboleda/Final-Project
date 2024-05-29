@@ -1,44 +1,117 @@
-// import React, { useState } from 'react';
+import React, { useState } from 'react';
 import './ChoreBox.scss';
+
+
 
 // From Bootstrap
 // https://getbootstrap.com/docs/5.3/components/card/
 function ChoreBox({selectedMember}) {
+    const initialMembers = [
+        {
+          id: 1,
+          name: 'Bobby',
+          imgSrc: `${process.env.PUBLIC_URL}/Nerd.jpg`,
+          chores: [
+            { choreName: 'Do the dishes', choreLocation: 'Kitchen', dueDate: '2024-06-01', assignedTo: 'Nerd' },
+            { choreName: 'Take out the trash', choreLocation: 'Garage', dueDate: '2024-06-02', assignedTo: 'Nerd' }
+          ],
+          position: {x:0 , y:0}
+        },
+        {
+          id: 2,
+          name: 'Cathie',
+          imgSrc: `${process.env.PUBLIC_URL}/Happy.jpg`,
+          chores: [
+            { choreName: 'Vacuum the house', choreLocation: 'Living Room', dueDate: '2024-06-03', assignedTo: 'Happy' },
+            { choreName: 'Water the plants', choreLocation: 'Garden', dueDate: '2024-06-04', assignedTo: 'Happy' }
+          ],
+        },
+      ];
+    
+    const [householdMembers, setHouseholdMembers] = useState(initialMembers);
+    const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+    
+    const appendAlert = (message, type) => {
+        const wrapper = document.createElement('div')
+        wrapper.innerHTML = [
+          `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+          `   <div>${message}</div>`,
+          '   <button type="button" class="btn-close" onclick="this.parentElement.remove()" aria-label="Close"></button>',
+          '</div>'
+        ].join('')
+    
+        alertPlaceholder.append(wrapper)
+      }
+    
+    // to disable warning when building
+    // eslint-disable-next-line
+    const handleAddMember = (member) => {
+        if (householdMembers.find((mem) => mem.name===member.name)){
+          
+          appendAlert('WOOPS ALREADY A USER!', 'warning')
+        }
+        else {
+        setHouseholdMembers([...householdMembers, member]);
+        }
+      };
+    
+    
+    const handleChoreCompletion = (memberId, choreIndex) => {
+        setHouseholdMembers((prevMembers) =>
+          prevMembers.map((member) =>
+            member.id === memberId
+              ? {
+                  ...member,
+                  chores: member.chores.map((chore, index) =>
+                    index === choreIndex ? { ...chore, completed: !chore.completed } : chore
+                  ),
+                }
+              : member
+          )
+        );
+    }
+
     // console.log("ChoreBox -> selectedMember: " + selectedMember);
     // console.log("ChoreBox -> selectedMember.name: " + selectedMember.name);
-    if (selectedMember)
-
-    {    if (selectedMember.name  === undefined){
+      if (selectedMember === null){
             console.log("ChoreBox -> SELECTED MEMBER === NULL");
             return (
                 <div className="card">
                 {/* <img src="..." className="card-img-top" alt="..."/> */}
                 <div className="card-body">
                     {/* {selectedMember === null && (<h5 className="card-title">All Chores</h5>)} */}
-                    <h5 className = "card-title">Completed Chores</h5>
+                    <h5 className = "card-title">All Completed Chores</h5>
                     <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     {/* <a href="#" className="btn btn-primary">Go somewhere</a> */}
-                    <p> Selected member: {selectedMember.name}</p>
                 </div>
                 </div>);
-        }else{
-            console.log("ChoreBox -> SELECTED MEMBER != NULL");
-            return (
-                <div className="card">
-                {/* <img src="..." className="card-img-top" alt="..."/> */}
+    }else{
+        console.log("ChoreBox -> SELECTED MEMBER != NULL");
+        return (
+            <div className="card">
+            {/* <img src="..." className="card-img-top" alt="..."/> */}
                 <div className="card-body">
-                    <h5 className="card-title">All Chores</h5>
                     <h5 className = "card-title"> {selectedMember.name}'s Chores</h5>
                     
                     <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     {/* <a href="#" className="btn btn-primary">Go somewhere</a> */}
                     <p> Selected member: {selectedMember.name}</p>
+                    {selectedMember.chores.map((chore, index) => (
+                        <li key={index}>
+                            <input
+                            type="checkbox"
+                            checked={chore.completed}
+                            onChange={() => handleChoreCompletion(selectedMember.id, index)}
+                            />
+                            {chore.choreName}
+                        </li>
+                    ))}
                 </div>
-                </div>
-            );}
+            </div>
+        );}
     }
     
     
-}
+
 
 export default ChoreBox;

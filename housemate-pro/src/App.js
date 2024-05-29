@@ -48,6 +48,7 @@ function App() {
 // eslint-disable-next-line
   const [members, setMembers] = useState(initialMembers);
   const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+  
   const appendAlert = (message, type) => {
     const wrapper = document.createElement('div')
     wrapper.innerHTML = [
@@ -137,6 +138,7 @@ function App() {
     );
   };
 
+  // to chorebox
   const handleChoreCompletion = (memberId, choreIndex) => {
     setHouseholdMembers((prevMembers) =>
       prevMembers.map((member) =>
