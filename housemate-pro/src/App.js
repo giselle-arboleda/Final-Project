@@ -210,27 +210,11 @@ function App() {
           <DraggableMember key={member.id} member={member} onDragEnd={handleDragEnd} />
         ))}
         </div>
-
-        <ChoreBox selectedMember={selectedMember}></ChoreBox>
+        <div>
+          {/* Display All Completed Chores OR Display Selected Person's Chores */}
+          <ChoreBox selectedMember={selectedMember} householdMembers={householdMembers}></ChoreBox>
+        </div>
         
-        {/* Ideally the below code would go into ChoreBox.js. But I'm Having trouble passing selectedMember into ChoreBox.js */}
-        {/* {selectedMember && (
-            <div className="chores">
-              <h2>Chores for {selectedMember.name}</h2>
-              <ul>
-                {selectedMember.chores.map((chore, index) => (
-                  <li key={index}>
-                    <input
-                      type="checkbox"
-                      checked={chore.completed}
-                      onChange={() => handleChoreCompletion(selectedMember.id, index)}
-                    />
-                    {chore.choreName}
-                  </li>
-                ))}
-              </ul>
-            </div>
-        )} */}
       </div>
     </div>
     </Router>

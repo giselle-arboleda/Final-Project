@@ -5,7 +5,7 @@ import './ChoreBox.scss';
 
 // From Bootstrap
 // https://getbootstrap.com/docs/5.3/components/card/
-function ChoreBox({selectedMember}) {
+function ChoreBox({selectedMember, householdMembers}) {
     const initialMembers = [
         {
           id: 1,
