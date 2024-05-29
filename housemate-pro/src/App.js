@@ -5,10 +5,15 @@ import AssignChoreForm from './components/AssignChoreForm';
 import Navbar from './components/Navbar';
 import ChoreBox from "./components/ChoreBox";
 import DraggableMember from './components/DraggableMember';
+// to disable warning when building
+// eslint-disable-next-line
 import FloorPlan from './components/FloorPlan';
 import { ProgressBar } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+
+// import Logger from 'simple-console-logger';
+// Logger.configure({level: 'debug'});
 
 const initialMembers = [
   {
@@ -39,6 +44,8 @@ function App() {
   const [showAddMemberForm, setShowAddMemberForm] = useState(false);
   const [showAssignChoreForm, setShowAssignChoreForm] = useState(false);
   const [selectedMember, setSelectedMember] = useState(null);
+  // to disable warning when building
+// eslint-disable-next-line
   const [members, setMembers] = useState(initialMembers);
   const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
   const appendAlert = (message, type) => {
@@ -78,6 +85,7 @@ function App() {
         ...myMember,
         chores: [...myMember.chores, chore],
       });
+      console.print("setSelectedMember: selected Member: " + selectedMember);
       setShowAssignChoreForm(false);
   };
 
@@ -99,6 +107,7 @@ function App() {
 
   const selectMember = (member) => {
     setSelectedMember(member);
+    console.log("App.js selectMember function -> selectMember.name:" + member.name);
   };
 
   const handleReset=()=> {
@@ -118,6 +127,8 @@ function App() {
     );
   };
 
+  // to disable warning when building
+  // eslint-disable-next-line
   const handleDrop = (member, position) => {
     setHouseholdMembers((prevMembers) =>
       prevMembers.map((m) =>
@@ -200,7 +211,8 @@ function App() {
         ))}
         </div>
 
-        {/* <ChoreBox selectedMember={selectedMember}></ChoreBox> */}
+        <ChoreBox selectedMember={selectedMember}></ChoreBox>
+        {console.log("AppJS APP()-> selectedMember: " + selectedMember)}
         
         {/* Ideally the below code would go into ChoreBox.js. But I'm Having trouble passing selectedMember into ChoreBox.js */}
         {selectedMember && (
