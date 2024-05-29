@@ -11,6 +11,7 @@ import FloorPlan from './components/FloorPlan';
 import { ProgressBar } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import MembersComponent from './components/MembersComponent';
 
 // import Logger from 'simple-console-logger';
 // Logger.configure({level: 'debug'});
@@ -90,9 +91,6 @@ function App() {
       setShowAssignChoreForm(false);
   };
 
-  const openAddMemberForm = () => {
-    setShowAddMemberForm(true);
-  };
 
   const closeAddMemberForm = () => {
     setShowAddMemberForm(false);
@@ -106,10 +104,6 @@ function App() {
     setShowAssignChoreForm(false);
   };
 
-  const selectMember = (member) => {
-    setSelectedMember(member);
-    console.log("App.js selectMember function -> selectMember.name:" + member.name);
-  };
 
   const handleReset=()=> {
     setHouseholdMembers((prevMembers) =>
@@ -193,18 +187,7 @@ function App() {
         <div className="floor-plan">
           <h2>Floor Plan</h2>
           <img src={`${process.env.PUBLIC_URL}/2D-floor-plan-with-room-color.jpg`} alt="2D Floor Plan" />
-          <div className="members">
-            <h2>View/Edit Members</h2>
-            {householdMembers.map((member) => (
-              <div key={member.id} className="member-container" onClick={() => selectMember(member)}>
-              <img src={member.imgSrc} alt={member.name} className="member-photo" />
-              <p className="member-name">{member.name}</p>
-            </div>
-              
-            ))}
-            <button className="add-member-button" onClick={openAddMemberForm}>+</button>
-
-          </div>
+          <MembersComponent householdMembers={householdMembers} setSelectedMember={setSelectedMember} setShowAddMemberForm={setShowAddMemberForm}></MembersComponent>
         </div>
         
         <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '20px' }}>
