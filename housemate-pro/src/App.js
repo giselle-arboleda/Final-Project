@@ -103,12 +103,10 @@ function App() {
     setShowAssignChoreForm(false);
   };
 
-<<<<<<< HEAD
-=======
+
   const selectMember = (member) => {
     setSelectedMember(member);
   };
->>>>>>> ff03130348f26ce2ab29a95147cfbd86f1b8429c
 
   const handleReset=()=> {
     setHouseholdMembers((prevMembers) =>
@@ -203,6 +201,7 @@ function App() {
 
         <div>
           {/* Display All Completed Chores OR Display Selected Person's Chores */}
+          {/* <ChoreBox selectedMember={selectedMember}></ChoreBox> */}
           <ChoreBox selectedMember={selectedMember} householdMembers={householdMembers}></ChoreBox>
         </div>
         

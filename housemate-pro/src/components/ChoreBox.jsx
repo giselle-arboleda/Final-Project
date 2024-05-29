@@ -5,7 +5,7 @@ import './ChoreBox.scss';
 
 // From Bootstrap
 // https://getbootstrap.com/docs/5.3/components/card/
-function ChoreBox({selectedMember, householdMembers}) {
+function ChoreBox({selectedMember, householdMembers}) { //  
     const initialMembers = [
         {
           id: 1,
@@ -90,28 +90,28 @@ function ChoreBox({selectedMember, householdMembers}) {
     }
 
 
-    const mapAllChores = () => {
-      if (householdMembers.length === 0){
-        console.log("householdMembers === 0");
-        return <p>No Chores Completed</p>;
-      }
-      let completedChores = [];
-      for (member in householdMembers){
-        for (chore in member.chores){
-          // NEED TO ADD COMPLETED TO CHORES ARRAY
-          if (chore.completed){
-            completedChores.push(chore);
-          }
-        }
-      }
-      // NEED TO ASSIGN CHORE ID
-      return (completedChores.map((choreIndex, choreName, choreLocation, assignedTo) => (
-        <li key={choreIndex}>
-              <p>{assignedTo} completed {choreName} @ {choreLocation}</p>
-        </li>
-      )));
+    // const mapAllChores = () => {
+    //   if (householdMembers.length === 0){
+    //     console.log("householdMembers === 0");
+    //     return <p>No Chores Completed</p>;
+    //   }
+    //   let completedChores = [];
+    //   for (member in householdMembers){
+    //     for (chore in member.chores){
+    //       // NEED TO ADD COMPLETED TO CHORES ARRAY
+    //       if (chore.completed){
+    //         completedChores.push(chore);
+    //       }
+    //     }
+    //   }
+    //   // NEED TO ASSIGN CHORE ID
+    //   return (completedChores.map((choreIndex, choreName, choreLocation, assignedTo) => (
+    //     <li key={choreIndex}>
+    //           <p>{assignedTo} completed {choreName} @ {choreLocation}</p>
+    //     </li>
+    //   )));
 
-    }
+    // }
 
     // THESE TWO ARE NOT WORKING - NOT SURE WHY
     const getSelectedPersonImgSrc = () =>{
