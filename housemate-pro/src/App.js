@@ -37,7 +37,7 @@ const initialMembers = [
   },
 ];
 
-const imageSources = ['/Stars.jpg', '/Nerd.jpg', '/Happy.jpg', '/Crazy.jpg']
+const imageSources = ['/Stars.jpg', '/Nerd.jpg', '/Happy.jpg', '/Crazy.jpg', '/Heart.jpg',  '/Sleepy.jpg']
 
 function App() {
   const [householdMembers, setHouseholdMembers] = useState(initialMembers);
