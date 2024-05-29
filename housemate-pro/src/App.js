@@ -48,7 +48,7 @@ function App() {
 // eslint-disable-next-line
   const [members, setMembers] = useState(initialMembers);
   const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
-  
+
   const appendAlert = (message, type) => {
     const wrapper = document.createElement('div')
     wrapper.innerHTML = [
@@ -217,7 +217,7 @@ function App() {
         {console.log("AppJS APP()-> selectedMember: " + selectedMember)}
         
         {/* Ideally the below code would go into ChoreBox.js. But I'm Having trouble passing selectedMember into ChoreBox.js */}
-        {selectedMember && (
+        {/* {selectedMember && (
             <div className="chores">
               <h2>Chores for {selectedMember.name}</h2>
               <ul>
@@ -233,7 +233,7 @@ function App() {
                 ))}
               </ul>
             </div>
-        )}
+        )} */}
       </div>
     </div>
     </Router>
