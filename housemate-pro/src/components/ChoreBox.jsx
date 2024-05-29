@@ -109,7 +109,7 @@ function ChoreBox({selectedMember, householdMembers}) {
         <li key={choreIndex}>
               <p>{assignedTo} completed {choreName} @ {choreLocation}</p>
         </li>
-      ));
+      )));
 
     }
 
