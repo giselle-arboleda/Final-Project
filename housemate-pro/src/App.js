@@ -75,7 +75,7 @@ function App() {
   const handleAddChore = (chore) => {
       
     const myMember = householdMembers.find((member) => member.name===chore.assignedTo);
-      console.log(myMember);
+      // console.log(myMember);
       setHouseholdMembers(
         householdMembers.map((member) =>
           member.id === myMember.id
@@ -87,7 +87,6 @@ function App() {
         ...myMember,
         chores: [...myMember.chores, chore],
       });
-      console.print("setSelectedMember: selected Member: " + selectedMember);
       setShowAssignChoreForm(false);
   };
 
@@ -104,6 +103,12 @@ function App() {
     setShowAssignChoreForm(false);
   };
 
+<<<<<<< HEAD
+=======
+  const selectMember = (member) => {
+    setSelectedMember(member);
+  };
+>>>>>>> ff03130348f26ce2ab29a95147cfbd86f1b8429c
 
   const handleReset=()=> {
     setHouseholdMembers((prevMembers) =>
@@ -195,28 +200,11 @@ function App() {
           <DraggableMember key={member.id} member={member} onDragEnd={handleDragEnd} />
         ))}
         </div>
-
-        <ChoreBox selectedMember={selectedMember}></ChoreBox>
-        {console.log("AppJS APP()-> selectedMember: " + selectedMember)}
+        <div>
+          {/* Display All Completed Chores OR Display Selected Person's Chores */}
+          <ChoreBox selectedMember={selectedMember} householdMembers={householdMembers}></ChoreBox>
+        </div>
         
-        {/* Ideally the below code would go into ChoreBox.js. But I'm Having trouble passing selectedMember into ChoreBox.js */}
-        {/* {selectedMember && (
-            <div className="chores">
-              <h2>Chores for {selectedMember.name}</h2>
-              <ul>
-                {selectedMember.chores.map((chore, index) => (
-                  <li key={index}>
-                    <input
-                      type="checkbox"
-                      checked={chore.completed}
-                      onChange={() => handleChoreCompletion(selectedMember.id, index)}
-                    />
-                    {chore.choreName}
-                  </li>
-                ))}
-              </ul>
-            </div>
-        )} */}
       </div>
     </div>
     </Router>

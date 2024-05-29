@@ -5,7 +5,7 @@ import './ChoreBox.scss';
 
 // From Bootstrap
 // https://getbootstrap.com/docs/5.3/components/card/
-function ChoreBox({selectedMember}) {
+function ChoreBox({selectedMember, householdMembers}) {
     const initialMembers = [
         {
           id: 1,
@@ -71,41 +71,65 @@ function ChoreBox({selectedMember}) {
         );
     }
 
-    // console.log("ChoreBox -> selectedMember: " + selectedMember);
-    // console.log("ChoreBox -> selectedMember.name: " + selectedMember.name);
-      if (selectedMember === null){
-            console.log("ChoreBox -> SELECTED MEMBER === NULL");
-            return (
-                <div className="card">
-                {/* <img src="..." className="card-img-top" alt="..."/> */}
+
+    const mapSelectedPersonChores = () => {
+      if (selectedMember.chores.length === 0){
+        return <p className="card-text">No Chores Assigned to {selectedMember.name}</p>
+      }else{
+        return (selectedMember.chores.map((chore, index) => (
+          <li key={index}>
+              <input
+              type="checkbox"
+              checked={chore.completed}
+              onChange={() => handleChoreCompletion(selectedMember.id, index)}
+              />
+              <p>{chore.choreName} @ {chore.choreLocation}</p>
+
+              
+          </li>
+      )));
+        
+      }
+      
+    }
+
+    // THESE TWO ARE NOT WORKING - NOT SURE WHY
+    const getSelectedPersonImgSrc = () =>{
+      console.log("getSelectedPersonImgSrc: " + selectedMember.imgSrc);
+      if (selectedMember.imgSrc === null){
+        return "...";
+      }
+      return selectedMember.imgSrc;
+    }
+
+    const getSelectedPersonImgAlt = () =>{
+      if (selectedMember.alt === null){
+        return "...";
+      }
+      return selectedMember.alt;
+    }
+
+
+
+    // get a list of all the members -> then get a list of all the chores -> print them out in a list.
+
+    if (selectedMember === null){
+          return (
+              <div className="card">
+              <img src={getSelectedPersonImgSrc} className="card-img-top" alt={getSelectedPersonImgAlt}/>
                 <div className="card-body">
-                    {/* {selectedMember === null && (<h5 className="card-title">All Chores</h5>)} */}
                     <h5 className = "card-title">All Completed Chores</h5>
                     <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    {/* <a href="#" className="btn btn-primary">Go somewhere</a> */}
+                    {/* mapAllChores */}
                 </div>
-                </div>);
+              </div>);
     }else{
-        console.log("ChoreBox -> SELECTED MEMBER != NULL");
         return (
             <div className="card">
-            {/* <img src="..." className="card-img-top" alt="..."/> */}
+            <img src={getSelectedPersonImgSrc} className="card-img-top" alt={getSelectedPersonImgAlt}/>
                 <div className="card-body">
                     <h5 className = "card-title"> {selectedMember.name}'s Chores</h5>
-                    
-                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    {/* <a href="#" className="btn btn-primary">Go somewhere</a> */}
-                    <p> Selected member: {selectedMember.name}</p>
-                    {selectedMember.chores.map((chore, index) => (
-                        <li key={index}>
-                            <input
-                            type="checkbox"
-                            checked={chore.completed}
-                            onChange={() => handleChoreCompletion(selectedMember.id, index)}
-                            />
-                            {chore.choreName}
-                        </li>
-                    ))}
+                    {mapSelectedPersonChores()}
                 </div>
             </div>
         );}
