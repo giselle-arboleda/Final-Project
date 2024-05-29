@@ -74,7 +74,7 @@ function App() {
   const handleAddChore = (chore) => {
       
     const myMember = householdMembers.find((member) => member.name===chore.assignedTo);
-      console.log(myMember);
+      // console.log(myMember);
       setHouseholdMembers(
         householdMembers.map((member) =>
           member.id === myMember.id
@@ -86,7 +86,6 @@ function App() {
         ...myMember,
         chores: [...myMember.chores, chore],
       });
-      console.print("setSelectedMember: selected Member: " + selectedMember);
       setShowAssignChoreForm(false);
   };
 
@@ -108,7 +107,6 @@ function App() {
 
   const selectMember = (member) => {
     setSelectedMember(member);
-    console.log("App.js selectMember function -> selectMember.name:" + member.name);
   };
 
   const handleReset=()=> {
@@ -214,7 +212,6 @@ function App() {
         </div>
 
         <ChoreBox selectedMember={selectedMember}></ChoreBox>
-        {console.log("AppJS APP()-> selectedMember: " + selectedMember)}
         
         {/* Ideally the below code would go into ChoreBox.js. But I'm Having trouble passing selectedMember into ChoreBox.js */}
         {/* {selectedMember && (
