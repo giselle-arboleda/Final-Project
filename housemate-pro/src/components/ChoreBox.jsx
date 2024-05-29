@@ -95,7 +95,21 @@ function ChoreBox({selectedMember, householdMembers}) {
         console.log("householdMembers === 0");
         return <p>No Chores Completed</p>;
       }
-      return "";
+      let completedChores = [];
+      for (member in householdMembers){
+        for (chore in member.chores){
+          // NEED TO ADD COMPLETED TO CHORES ARRAY
+          if (chore.completed){
+            completedChores.push(chore);
+          }
+        }
+      }
+      // NEED TO ASSIGN CHORE ID
+      return (completedChores.map((choreIndex, choreName, choreLocation, assignedTo) => (
+        <li key={choreIndex}>
+              <p>{assignedTo} completed {choreName} @ {choreLocation}</p>
+        </li>
+      ));
 
     }
 
