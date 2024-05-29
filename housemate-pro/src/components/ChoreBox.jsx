@@ -28,7 +28,7 @@ function ChoreBox({selectedMember, householdMembers}) {
         },
       ];
     
-    const [householdMembers, setHouseholdMembers] = useState(initialMembers);
+    // const [householdMembers, setHouseholdMembers] = useState(initialMembers);
     const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
     
     const appendAlert = (message, type) => {
@@ -45,30 +45,30 @@ function ChoreBox({selectedMember, householdMembers}) {
     
     // to disable warning when building
     // eslint-disable-next-line
-    const handleAddMember = (member) => {
-        if (householdMembers.find((mem) => mem.name===member.name)){
+    // const handleAddMember = (member) => {
+    //     if (householdMembers.find((mem) => mem.name===member.name)){
           
-          appendAlert('WOOPS ALREADY A USER!', 'warning')
-        }
-        else {
-        setHouseholdMembers([...householdMembers, member]);
-        }
-      };
+    //       appendAlert('WOOPS ALREADY A USER!', 'warning')
+    //     }
+    //     else {
+    //     setHouseholdMembers([...householdMembers, member]);
+    //     }
+    //   };
     
     
     const handleChoreCompletion = (memberId, choreIndex) => {
-        setHouseholdMembers((prevMembers) =>
-          prevMembers.map((member) =>
-            member.id === memberId
-              ? {
-                  ...member,
-                  chores: member.chores.map((chore, index) =>
-                    index === choreIndex ? { ...chore, completed: !chore.completed } : chore
-                  ),
-                }
-              : member
-          )
-        );
+        // setHouseholdMembers((prevMembers) =>
+        //   prevMembers.map((member) =>
+        //     member.id === memberId
+        //       ? {
+        //           ...member,
+        //           chores: member.chores.map((chore, index) =>
+        //             index === choreIndex ? { ...chore, completed: !chore.completed } : chore
+        //           ),
+        //         }
+        //       : member
+        //   )
+        // );
     }
 
 
@@ -84,13 +84,19 @@ function ChoreBox({selectedMember, householdMembers}) {
               onChange={() => handleChoreCompletion(selectedMember.id, index)}
               />
               <p>{chore.choreName} @ {chore.choreLocation}</p>
-
-              
           </li>
       )));
-        
+      } 
+    }
+
+
+    const mapAllChores = () => {
+      if (householdMembers.length === 0){
+        console.log("householdMembers === 0");
+        return <p>No Chores Completed</p>;
       }
-      
+      return "";
+
     }
 
     // THESE TWO ARE NOT WORKING - NOT SURE WHY

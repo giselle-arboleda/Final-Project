@@ -210,6 +210,7 @@ function App() {
           <DraggableMember key={member.id} member={member} onDragEnd={handleDragEnd} />
         ))}
         </div>
+
         <div>
           {/* Display All Completed Chores OR Display Selected Person's Chores */}
           <ChoreBox selectedMember={selectedMember} householdMembers={householdMembers}></ChoreBox>
