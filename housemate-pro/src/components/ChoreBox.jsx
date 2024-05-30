@@ -5,7 +5,7 @@ import './ChoreBox.scss';
 
 // From Bootstrap
 // https://getbootstrap.com/docs/5.3/components/card/
-function ChoreBox({selectedMember, householdMembers}) { //  
+function ChoreBox({selectedMember, householdMembers, setHouseholdMembers}) { //  
     const initialMembers = [
         {
           id: 1,
@@ -57,18 +57,18 @@ function ChoreBox({selectedMember, householdMembers}) { //
     
     
     const handleChoreCompletion = (memberId, choreIndex) => {
-        // setHouseholdMembers((prevMembers) =>
-        //   prevMembers.map((member) =>
-        //     member.id === memberId
-        //       ? {
-        //           ...member,
-        //           chores: member.chores.map((chore, index) =>
-        //             index === choreIndex ? { ...chore, completed: !chore.completed } : chore
-        //           ),
-        //         }
-        //       : member
-        //   )
-        // );
+        setHouseholdMembers((prevMembers) =>
+          prevMembers.map((member) =>
+            member.id === memberId
+              ? {
+                  ...member,
+                  chores: member.chores.map((chore, index) =>
+                    index === choreIndex ? { ...chore, completed: !chore.completed } : chore
+                  ),
+                }
+              : member
+          )
+        );
     }
 
 

@@ -202,7 +202,7 @@ function App() {
         <div>
           {/* Display All Completed Chores OR Display Selected Person's Chores */}
           {/* <ChoreBox selectedMember={selectedMember}></ChoreBox> */}
-          <ChoreBox selectedMember={selectedMember} householdMembers={householdMembers}></ChoreBox>
+          <ChoreBox selectedMember={selectedMember} householdMembers={householdMembers} setHouseholdMembers={setHouseholdMembers}></ChoreBox>
         </div>
         
       </div>
