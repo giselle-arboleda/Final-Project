@@ -171,11 +171,12 @@ function App() {
             {members.map((member) => (
               <DraggableMember key={member.id} member={member} onDragEnd={handleDragEnd} />
             ))}
-          </div>
+          
         
-        <div className='draggable-members-container'>
-        <MembersComponent style='column' householdMembers={householdMembers} setSelectedMember={setSelectedMember} setShowAddMemberForm={setShowAddMemberForm}></MembersComponent>
+        
         </div>
+
+        <MembersComponent style='column' householdMembers={householdMembers} setSelectedMember={setSelectedMember} setShowAddMemberForm={setShowAddMemberForm}></MembersComponent>
 
         <div>
           {/* Display All Completed Chores OR Display Selected Person's Chores */}
