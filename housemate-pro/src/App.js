@@ -167,17 +167,16 @@ function App() {
         <div className="floor-plan">
           <h2>Floor Plan</h2>
           <img src={`${process.env.PUBLIC_URL}/2D-floor-plan-with-room-color.jpg`} alt="2D Floor Plan" />
-          <MembersComponent householdMembers={householdMembers} setSelectedMember={setSelectedMember} setShowAddMemberForm={setShowAddMemberForm}></MembersComponent>
-        </div>
-        
-        <div className='draggable-members-container'>
-          <div className='draggable-members'>
-            <h2>Drag & Drop</h2>
+          <h2>Drag & Drop</h2>
             {members.map((member) => (
               <DraggableMember key={member.id} member={member} onDragEnd={handleDragEnd} />
             ))}
-         </div>
+          </div>
+        
+        <div className='draggable-members-container'>
+        <MembersComponent style='column' householdMembers={householdMembers} setSelectedMember={setSelectedMember} setShowAddMemberForm={setShowAddMemberForm}></MembersComponent>
         </div>
+
         <div>
           {/* Display All Completed Chores OR Display Selected Person's Chores */}
           {/* <ChoreBox selectedMember={selectedMember}></ChoreBox> */}
