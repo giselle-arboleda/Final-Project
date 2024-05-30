@@ -12,6 +12,7 @@ import { ProgressBar } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import MembersComponent from './components/MembersComponent';
+import ProgressBarComponent from './components/ProgressBarComponent';
 
 // import Logger from 'simple-console-logger';
 // Logger.configure({level: 'debug'});
@@ -144,40 +145,6 @@ function App() {
     );
   };
 
-  // to chorebox
-  const handleChoreCompletion = (memberId, choreIndex) => {
-    setHouseholdMembers((prevMembers) =>
-      prevMembers.map((member) =>
-        member.id === memberId
-          ? {
-              ...member,
-              chores: member.chores.map((chore, index) =>
-                index === choreIndex ? { ...chore, completed: !chore.completed } : chore
-              ),
-            }
-          : member
-      )
-    );
-
-    if (selectedMember && selectedMember.id === memberId) {
-      setSelectedMember((prevSelectedMember) => ({
-        ...prevSelectedMember,
-        chores: prevSelectedMember.chores.map((chore, index) =>
-          index === choreIndex ? { ...chore, completed: !chore.completed } : chore
-        ),
-      }));
-    }
-  };
-
-  const calculateProgress = () => {
-    const totalChores = householdMembers.reduce((sum, member) => sum + member.chores.length, 0);
-    const completedChores = householdMembers.reduce(
-      (sum, member) => sum + member.chores.filter((chore) => chore.completed).length,
-      0
-    );
-    return totalChores === 0 ? 0 : Math.round((completedChores / totalChores) * 100);
-  };
-
   return (
     <Router>
     <div className="App">
@@ -191,8 +158,8 @@ function App() {
       <div id="liveAlertPlaceholder"></div>
 
       <div className='progress-bar'>
-        <h2>Household Chore Status</h2>
-        <ProgressBar now={calculateProgress()} label={`${calculateProgress()}%`} />
+        <h2>Household Chore Completion Status</h2>
+        <ProgressBarComponent householdMembers={householdMembers} />
       </div>
     
       <div className="main-content">
@@ -203,13 +170,14 @@ function App() {
           <MembersComponent householdMembers={householdMembers} setSelectedMember={setSelectedMember} setShowAddMemberForm={setShowAddMemberForm}></MembersComponent>
         </div>
         
-        <div style={{ display: 'column', justifyContent: 'space-around', marginTop: '20px' }}>
-          <h2>Drag and Drop</h2>
-        {members.map((member) => (
-          <DraggableMember key={member.id} member={member} onDragEnd={handleDragEnd} />
-        ))}
+        <div className='draggable-members-container'>
+          <div className='draggable-members'>
+            <h2>Drag & Drop</h2>
+            {members.map((member) => (
+              <DraggableMember key={member.id} member={member} onDragEnd={handleDragEnd} />
+            ))}
+         </div>
         </div>
-
         <div>
           {/* Display All Completed Chores OR Display Selected Person's Chores */}
           {/* <ChoreBox selectedMember={selectedMember}></ChoreBox> */}
