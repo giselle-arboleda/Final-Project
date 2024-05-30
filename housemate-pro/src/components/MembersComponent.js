@@ -13,7 +13,7 @@ const MembersComponent = ({ householdMembers, setSelectedMember, setShowAddMembe
       };
 
     return (
-        <div className="members">
+        <div className="view-edit-members-container">
             <h2>View/Edit Members</h2>
             {householdMembers.map((member) => (
                 <div key={member.id} className="member-container" onClick={() => selectMember(member)}>

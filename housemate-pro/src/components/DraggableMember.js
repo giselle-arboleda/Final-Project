@@ -12,13 +12,12 @@ const DraggableMember = ({ member , onStart, onStop}) => {
     
     return (
         <Draggable onStart={onStart} onStop={onStop}>
-            <div>
                 <img
                     src={member.imgSrc}
                     alt={member.name}
                     style={memberStyle}
                 />
-            </div>
+
         </Draggable>
     );
 };
