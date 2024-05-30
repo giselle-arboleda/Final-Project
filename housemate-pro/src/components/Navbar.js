@@ -14,6 +14,10 @@ const navbar = ({ onRequestNewChore, onReset }) => {
             <Button className='request-chore-button' onClick={onRequestNewChore}>
               Assign New Chore
             </Button>
+
+            <Button className='request-chore-button' onClick={onReset}>
+              See Completed Chores
+            </Button>
           </Nav.Link>
         </Nav>
       </Navbar.Collapse>
