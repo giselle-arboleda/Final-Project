@@ -166,7 +166,7 @@ function App() {
         
         <div className="floor-plan">
           <h2>Floor Plan</h2>
-          <img src={`${process.env.PUBLIC_URL}/2D-floor-plan-with-room-color.jpg`} alt="2D Floor Plan" />
+          <img src={`${process.env.PUBLIC_URL}/2D-floor-plan-with-room-color.jpg`} alt="2D Floor Plan of a House" />
           <h2>Drag & Drop</h2>
             {members.map((member) => (
               <DraggableMember key={member.id} member={member} onDragEnd={handleDragEnd} />
