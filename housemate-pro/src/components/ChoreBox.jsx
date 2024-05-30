@@ -123,14 +123,14 @@ function ChoreBox({selectedMember, householdMembers, setHouseholdMembers}) { //
 
     const getSelectedPersonImgSrc = () =>{
       if (selectedMember === null || selectedMember.imgSrc === null){
-        return "...";
+        return "";
       }
       return selectedMember.imgSrc;
     }
 
     const getSelectedPersonImgAlt = () =>{
       if (selectedMember === null || selectedMember.alt === null){
-        return "...";
+        return "";
       }
       return selectedMember.alt;
     }
