@@ -115,15 +115,15 @@ function ChoreBox({selectedMember, householdMembers, setHouseholdMembers}) { //
 
     // THESE TWO ARE NOT WORKING - NOT SURE WHY
     const getSelectedPersonImgSrc = () =>{
-      console.log("getSelectedPersonImgSrc: " + selectedMember.imgSrc);
-      if (selectedMember.imgSrc === null){
+      //console.log("getSelectedPersonImgSrc: " + selectedMember.imgSrc);
+      if (selectedMember === null || selectedMember.imgSrc === null){
         return "...";
       }
       return selectedMember.imgSrc;
     }
 
     const getSelectedPersonImgAlt = () =>{
-      if (selectedMember.alt === null){
+      if (selectedMember === null || selectedMember.alt === null){
         return "...";
       }
       return selectedMember.alt;
@@ -136,7 +136,7 @@ function ChoreBox({selectedMember, householdMembers, setHouseholdMembers}) { //
     if (selectedMember === null){
           return (
               <div className="card">
-              <img src={getSelectedPersonImgSrc} className="card-img-top" alt={getSelectedPersonImgAlt}/>
+              <img src={getSelectedPersonImgSrc()} className="card-img-top" alt={getSelectedPersonImgAlt()}/>
                 <div className="card-body">
                     <h5 className = "card-title">All Completed Chores</h5>
                     <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -146,7 +146,7 @@ function ChoreBox({selectedMember, householdMembers, setHouseholdMembers}) { //
     }else{
         return (
             <div className="card">
-            <img src={getSelectedPersonImgSrc} className="card-img-top" alt={getSelectedPersonImgAlt}/>
+            <img src={getSelectedPersonImgSrc()} className="card-img-top" alt={getSelectedPersonImgAlt()}/>
                 <div className="card-body">
                     <h5 className = "card-title"> {selectedMember.name}'s Chores</h5>
                     {mapSelectedPersonChores()}
