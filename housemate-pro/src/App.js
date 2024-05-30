@@ -31,7 +31,7 @@ const initialMembers = [
   {
     id: 2,
     name: 'Cathie',
-    imgSrc: `${process.env.PUBLIC_URL}/Happy.jpg`,
+    imgSrc: `${process.env.PUBLIC_URL}/g410.svg`,
     chores: [
       { choreName: 'Vacuum the house', choreLocation: 'Living Room', dueDate: '2024-06-03', assignedTo: 'Cathie' },
       { choreName: 'Water the plants', choreLocation: 'Garden', dueDate: '2024-06-04', assignedTo: 'Cathie' }
@@ -178,7 +178,7 @@ function App() {
 
         <MembersComponent style='column' householdMembers={householdMembers} setSelectedMember={setSelectedMember} setShowAddMemberForm={setShowAddMemberForm}></MembersComponent>
 
-        <div>
+        <div className="">
           {/* Display All Completed Chores OR Display Selected Person's Chores */}
           {/* <ChoreBox selectedMember={selectedMember}></ChoreBox> */}
           <ChoreBox selectedMember={selectedMember} householdMembers={householdMembers} setHouseholdMembers={setHouseholdMembers}></ChoreBox>
