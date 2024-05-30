@@ -23,8 +23,8 @@ const initialMembers = [
     name: 'Bobby',
     imgSrc: `${process.env.PUBLIC_URL}/Nerd.jpg`,
     chores: [
-      { choreName: 'Do the dishes', choreLocation: 'Kitchen', dueDate: '2024-06-01', assignedTo: 'Nerd' },
-      { choreName: 'Take out the trash', choreLocation: 'Garage', dueDate: '2024-06-02', assignedTo: 'Nerd' }
+      { choreName: 'Do the dishes', choreLocation: 'Kitchen', dueDate: '2024-06-01', assignedTo: 'Bobby' },
+      { choreName: 'Take out the trash', choreLocation: 'Garage', dueDate: '2024-06-02', assignedTo: 'Bobby' }
     ],
     position: {x:0 , y:0}
   },
@@ -33,8 +33,8 @@ const initialMembers = [
     name: 'Cathie',
     imgSrc: `${process.env.PUBLIC_URL}/Happy.jpg`,
     chores: [
-      { choreName: 'Vacuum the house', choreLocation: 'Living Room', dueDate: '2024-06-03', assignedTo: 'Happy' },
-      { choreName: 'Water the plants', choreLocation: 'Garden', dueDate: '2024-06-04', assignedTo: 'Happy' }
+      { choreName: 'Vacuum the house', choreLocation: 'Living Room', dueDate: '2024-06-03', assignedTo: 'Cathie' },
+      { choreName: 'Water the plants', choreLocation: 'Garden', dueDate: '2024-06-04', assignedTo: 'Cathie' }
     ],
   },
 ];
