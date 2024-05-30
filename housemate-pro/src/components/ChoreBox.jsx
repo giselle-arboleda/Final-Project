@@ -147,8 +147,8 @@ function ChoreBox({selectedMember, householdMembers, setHouseholdMembers}) { //
               </div>);
     }else{
         return (
-            <div className="card">
-            <img src={getSelectedPersonImgSrc()} className="card-img-top" alt={getSelectedPersonImgAlt()}/>
+            <div className="card chore-box-card">
+            <img src={getSelectedPersonImgSrc()} className="chore-box-member-photo" alt={getSelectedPersonImgAlt()}/>
                 <div className="card-body">
                     <h5 className = "card-title"> {selectedMember.name}'s Chores</h5>
                     {mapSelectedPersonChores()}
