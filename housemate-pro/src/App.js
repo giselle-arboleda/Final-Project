@@ -194,15 +194,17 @@ function App() {
         <h2>Household Chore Status</h2>
         <ProgressBar now={calculateProgress()} label={`${calculateProgress()}%`} />
       </div>
-
+    
       <div className="main-content">
+        
         <div className="floor-plan">
           <h2>Floor Plan</h2>
           <img src={`${process.env.PUBLIC_URL}/2D-floor-plan-with-room-color.jpg`} alt="2D Floor Plan" />
           <MembersComponent householdMembers={householdMembers} setSelectedMember={setSelectedMember} setShowAddMemberForm={setShowAddMemberForm}></MembersComponent>
         </div>
         
-        <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '20px' }}>
+        <div style={{ display: 'column', justifyContent: 'space-around', marginTop: '20px' }}>
+          <h2>Drag and Drop</h2>
         {members.map((member) => (
           <DraggableMember key={member.id} member={member} onDragEnd={handleDragEnd} />
         ))}
