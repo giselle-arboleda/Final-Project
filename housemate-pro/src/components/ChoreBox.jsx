@@ -12,8 +12,8 @@ function ChoreBox({selectedMember, householdMembers, setHouseholdMembers}) { //
           name: 'Bobby',
           imgSrc: `${process.env.PUBLIC_URL}/Nerd.jpg`,
           chores: [
-            { choreName: 'Do the dishes', choreLocation: 'Kitchen', dueDate: '2024-06-01', assignedTo: 'Nerd' },
-            { choreName: 'Take out the trash', choreLocation: 'Garage', dueDate: '2024-06-02', assignedTo: 'Nerd' }
+            { choreName: 'Do the dishes', choreLocation: 'Kitchen', dueDate: '2024-06-01', assignedTo: 'Bobby' },
+            { choreName: 'Take out the trash', choreLocation: 'Garage', dueDate: '2024-06-02', assignedTo: 'Bobby' }
           ],
           position: {x:0 , y:0}
         },
@@ -22,8 +22,8 @@ function ChoreBox({selectedMember, householdMembers, setHouseholdMembers}) { //
           name: 'Cathie',
           imgSrc: `${process.env.PUBLIC_URL}/Happy.jpg`,
           chores: [
-            { choreName: 'Vacuum the house', choreLocation: 'Living Room', dueDate: '2024-06-03', assignedTo: 'Happy' },
-            { choreName: 'Water the plants', choreLocation: 'Garden', dueDate: '2024-06-04', assignedTo: 'Happy' }
+            { choreName: 'Vacuum the house', choreLocation: 'Living Room', dueDate: '2024-06-03', assignedTo: 'Cathie' },
+            { choreName: 'Water the plants', choreLocation: 'Garden', dueDate: '2024-06-04', assignedTo: 'Cathie' }
           ],
         },
       ];
@@ -90,32 +90,38 @@ function ChoreBox({selectedMember, householdMembers, setHouseholdMembers}) { //
     }
 
 
-    // const mapAllChores = () => {
-    //   if (householdMembers.length === 0){
-    //     console.log("householdMembers === 0");
-    //     return <p>No Chores Completed</p>;
-    //   }
-    //   let completedChores = [];
-    //   for (member in householdMembers){
-    //     for (chore in member.chores){
-    //       // NEED TO ADD COMPLETED TO CHORES ARRAY
-    //       if (chore.completed){
-    //         completedChores.push(chore);
-    //       }
-    //     }
-    //   }
-    //   // NEED TO ASSIGN CHORE ID
-    //   return (completedChores.map((choreIndex, choreName, choreLocation, assignedTo) => (
-    //     <li key={choreIndex}>
-    //           <p>{assignedTo} completed {choreName} @ {choreLocation}</p>
-    //     </li>
-    //   )));
+    const mapAllChores = () => {
+      if (householdMembers.length === 0){
+        return <p>(no members in the house yet)</p>;
+      }
 
-    // }
+      let completedChores = [];
+      // Find all completed chores
+      for (let member of householdMembers){
+        for (let chore of member.chores){
+          // NEED TO ADD COMPLETED TO CHORES ARRAY
+          if (chore.completed){
+            completedChores.push(chore);
+            console.log("chore completed pushed");
+          }
+        }
+      }
 
-    // THESE TWO ARE NOT WORKING - NOT SURE WHY
+      if (completedChores.length === 0){
+        return <p>(no completed chores yet)</p>
+      }
+
+      // NEED TO ASSIGN CHORE ID
+      // RIGHT NOW CHORE NAMES MUST BE UNIQUE
+      return (completedChores.map((chore) => (
+        // should be chore.choreId or something similar 
+        <li key={chore.choreName}> 
+              <p>{chore.assignedTo} completed {chore.choreName} in the {chore.choreLocation}</p>
+        </li>
+      )));
+    }
+
     const getSelectedPersonImgSrc = () =>{
-      //console.log("getSelectedPersonImgSrc: " + selectedMember.imgSrc);
       if (selectedMember === null || selectedMember.imgSrc === null){
         return "...";
       }
@@ -130,17 +136,13 @@ function ChoreBox({selectedMember, householdMembers, setHouseholdMembers}) { //
     }
 
 
-
-    // get a list of all the members -> then get a list of all the chores -> print them out in a list.
-
     if (selectedMember === null){
           return (
               <div className="card">
               <img src={getSelectedPersonImgSrc()} className="card-img-top" alt={getSelectedPersonImgAlt()}/>
                 <div className="card-body">
                     <h5 className = "card-title">All Completed Chores</h5>
-                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    {/* mapAllChores */}
+                    {mapAllChores()}
                 </div>
               </div>);
     }else{
