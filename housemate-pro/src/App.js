@@ -164,7 +164,7 @@ function App() {
     
       <div className="main-content">
         
-        <div className="floor-plan">
+        <div className="col-lg-6 floor-plan">
           <h2>Floor Plan</h2>
           <img src={`${process.env.PUBLIC_URL}/2D-floor-plan-with-room-color.jpg`} alt="2D Floor Plan of a House" />
           <h2>Drag & Drop</h2>
@@ -175,10 +175,12 @@ function App() {
         
         
         </div>
+        <div className='col-md-3'>
+          <MembersComponent style='column' householdMembers={householdMembers} setSelectedMember={setSelectedMember} setShowAddMemberForm={setShowAddMemberForm}></MembersComponent>
+        </div>
+       
 
-        <MembersComponent style='column' householdMembers={householdMembers} setSelectedMember={setSelectedMember} setShowAddMemberForm={setShowAddMemberForm}></MembersComponent>
-
-        <div className="">
+        <div className="col-md-3">
           {/* Display All Completed Chores OR Display Selected Person's Chores */}
           {/* <ChoreBox selectedMember={selectedMember}></ChoreBox> */}
           <ChoreBox selectedMember={selectedMember} householdMembers={householdMembers} setHouseholdMembers={setHouseholdMembers}></ChoreBox>
