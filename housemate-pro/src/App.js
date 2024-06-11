@@ -31,7 +31,7 @@ const initialMembers = [
   {
     id: 2,
     name: 'Cathie',
-    imgSrc: `${process.env.PUBLIC_URL}/g410.svg`,
+    imgSrc: `${process.env.PUBLIC_URL}/monke.svg`,
     chores: [
       { choreName: 'Vacuum the house', choreLocation: 'Living Room', dueDate: '2024-06-03', assignedTo: 'Cathie' },
       { choreName: 'Water the plants', choreLocation: 'Garden', dueDate: '2024-06-04', assignedTo: 'Cathie' }
